@@ -1,4 +1,4 @@
-import 'package:cinema_pedia/config/constants/environment.dart';
+// import 'package:cinema_pedia/config/constants/environment.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,9 +9,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(Environment.movieDBKey) ,
-      ),
+      body: Placeholder()
     );
   }
 }
