@@ -17,15 +17,25 @@ class MoviesSlideShow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
     return SizedBox(
       height: 310,
       width: double.infinity,
       child: Swiper(
-        viewportFraction: 0.8,
-        scale: 0.9,
         autoplay: true,
-        itemCount: movies.length,
         itemBuilder: (context,index) => _Slide(movie: movies[index]),
+        itemCount: movies.length,
+        pagination: SwiperPagination(
+          builder: DotSwiperPaginationBuilder(
+            activeColor: colors.primary,
+            color: colors.secondary
+          ),
+          margin: const EdgeInsets.only(top: 0)
+        ),
+        scale: 0.9,
+        viewportFraction: 0.8,
       ),
     );
   }
@@ -79,7 +89,7 @@ class _ImageSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
-      tween: Tween<double>(begin: 0.0, end: 1.0), 
+      tween: Tween<double>(begin: 0.0, end: 1.5), 
       duration: const Duration(milliseconds: 1000), 
       builder: (context, value, child){
         return Opacity(
