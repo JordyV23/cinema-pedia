@@ -38,16 +38,20 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     return Column(
       children: [
         CustomAppbar(),
-        Expanded(
-          child: ListView.builder(
-              itemCount: nowPlayingMoviews.length,
-              itemBuilder: (context, index) {
-                final movie = nowPlayingMoviews[index];
-                return ListTile(
-                  title: Text(movie.title),
-                );
-              }),
-        )
+        MoviesSlideShow(movies: nowPlayingMoviews)
+
+
+
+        // Expanded(
+        //   child: ListView.builder(
+        //       itemCount: nowPlayingMoviews.length,
+        //       itemBuilder: (context, index) {
+        //         final movie = nowPlayingMoviews[index];
+        //         return ListTile(
+        //           title: Text(movie.title),
+        //         );
+        //       }),
+        // )
       ],
     );
   }
