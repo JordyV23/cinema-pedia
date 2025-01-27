@@ -1,3 +1,4 @@
+import 'package:cinema_pedia/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart'; 
 import 'package:cinema_pedia/presentation/widgets/widgets.dart';
 import 'package:cinema_pedia/presentation/providers/providers.dart';
@@ -33,13 +34,18 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    // final nowPlayingMoviews = ref.watch(nowPlayingMoviesProvider);
+    final nowPlayingMoviews = ref.watch(nowPlayingMoviesProvider);
     final nowPlayingMoviesSlide = ref.watch(moviesSlideShowProvider);
 
     return Column(
       children: [
         CustomAppbar(),
-        MoviesSlideShow(movies: nowPlayingMoviesSlide)
+        MoviesSlideShow(movies: nowPlayingMoviesSlide),
+        MovieHorizontalListview(
+          movies: nowPlayingMoviews,
+          title: 'En Cines',
+          subTitle:HumanFormats.dayNameMonthNumber(),
+        )
       ],
     );
   }
