@@ -45,6 +45,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           movies: nowPlayingMoviews,
           title: 'En Cines',
           subTitle:HumanFormats.dayNameMonthNumber(),
+          loadNextPage: () {
+            ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+          },
         )
       ],
     );
