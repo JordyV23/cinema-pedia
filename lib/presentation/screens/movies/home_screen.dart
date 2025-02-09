@@ -30,11 +30,17 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   void initState() {
     super.initState();
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+    ref.read(popularMoviesProvider.notifier).loadNextPage();
+    ref.read(upCommingMoviesProvider.notifier).loadNextPage();
+    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
   }
 
   @override
   Widget build(BuildContext context) {
     final nowPlayingMoviews = ref.watch(nowPlayingMoviesProvider);
+    final popularMovies = ref.watch(popularMoviesProvider);
+    final upCommingMovies = ref.watch(upCommingMoviesProvider);
+    final topRatedMovies = ref.watch(topRatedMoviesProvider);
     final nowPlayingMoviesSlide = ref.watch(moviesSlideShowProvider);
 
     return CustomScrollView(
@@ -58,19 +64,27 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                   },
                 ),
                 MovieHorizontalListview(
-                  movies: nowPlayingMoviews,
+                  movies: upCommingMovies,
                   title: 'Próximamente',
                   subTitle:'En este Mes',
                   loadNextPage: () {
-                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                    ref.read(upCommingMoviesProvider.notifier).loadNextPage();
                   },
                 ),
                 MovieHorizontalListview(
-                  movies: nowPlayingMoviews,
+                  movies: popularMovies,
                   title: 'Populares',
-                  subTitle:HumanFormats.dayNameMonthNumber(),
+                  subTitle:'A día de hoy',
                   loadNextPage: () {
-                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                    ref.read(popularMoviesProvider.notifier).loadNextPage();
+                  },
+                ),
+                MovieHorizontalListview(
+                  movies: topRatedMovies,
+                  title: 'Mejor Calificadas',
+                  subTitle: 'En la Historia',
+                  loadNextPage: () {
+                    ref.read(topRatedMoviesProvider.notifier).loadNextPage();
                   },
                 ),
                 const SizedBox(height: 10,)

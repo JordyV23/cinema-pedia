@@ -121,7 +121,7 @@ class _SliceMovieRating extends StatelessWidget {
         children: [
           Icon(Icons.star_half_outlined, color: Colors.amberAccent.shade700),
           const SizedBox(width: 3),
-          Text('${movie.voteAverage}',
+          Text(HumanFormats.number(movie.voteAverage, decimal: 2),
             style: textStyles.bodyMedium?.copyWith(color: Colors.amberAccent.shade700),
           ),
           const SizedBox(width: 10),
