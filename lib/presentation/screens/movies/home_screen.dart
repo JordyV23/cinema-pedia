@@ -37,19 +37,48 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final nowPlayingMoviews = ref.watch(nowPlayingMoviesProvider);
     final nowPlayingMoviesSlide = ref.watch(moviesSlideShowProvider);
 
-    return Column(
-      children: [
-        CustomAppbar(),
-        MoviesSlideShow(movies: nowPlayingMoviesSlide),
-        MovieHorizontalListview(
-          movies: nowPlayingMoviews,
-          title: 'En Cines',
-          subTitle:HumanFormats.dayNameMonthNumber(),
-          loadNextPage: () {
-            ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
-          },
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          floating: true,
+          title: CustomAppbar(),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate( (context, index) {
+            return 
+            Column(
+              children: [
+                MoviesSlideShow(movies: nowPlayingMoviesSlide),
+                MovieHorizontalListview(
+                  movies: nowPlayingMoviews,
+                  title: 'En Cines',
+                  subTitle:HumanFormats.dayNameMonthNumber(),
+                  loadNextPage: () {
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                  },
+                ),
+                MovieHorizontalListview(
+                  movies: nowPlayingMoviews,
+                  title: 'Próximamente',
+                  subTitle:'En este Mes',
+                  loadNextPage: () {
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                  },
+                ),
+                MovieHorizontalListview(
+                  movies: nowPlayingMoviews,
+                  title: 'Populares',
+                  subTitle:HumanFormats.dayNameMonthNumber(),
+                  loadNextPage: () {
+                    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+                  },
+                ),
+                const SizedBox(height: 10,)
+              ],
+            );
+          }, childCount: 1 )
         )
-      ],
+      ]
     );
   }
 }
